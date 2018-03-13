@@ -1,4 +1,3 @@
-
 const http = require('http'); //requerir el módulo http
       path = require('path'), //requiere el modulo path para trabajar con directorios
       express = require('express'), //permite el enrutamiento de peticiones.
@@ -19,27 +18,24 @@ const http = require('http'); //requerir el módulo http
 const RoutingUsers = require('./rutasUsuarios.js'), //Incluir el archivo de rutas de interacción de usuarios
       RoutingEvents = require('./rutasEventos.js') //Incluir el archivo de rutas de interacción de eventos
 
-const PORT = 8082;
-const app = express(); //Definir la variable express
+const PORT = 8082 //Definir el puerto de conexión
+const app = express() //Definir la variable express
 
-const Server = http.createServer(app); //Crar el servidor a través del módulo http
+const Server = http.createServer(app) //Crar el servidor a través del módulo http
 
-app.use(express.static('client')); //Definir el directorio cliente como directorio raiz
-app.use(bodyParser.json()); //Iniciar el módulo body-parser para interpretar datos en formato JSON.
+app.use(express.static('client')) //Definir el directorio cliente como directorio raiz
+app.use(bodyParser.json()) //Iniciar el módulo body-parser para interpretar datos en formato JSON.
 app.use(bodyParser.urlencoded({ extended: true}))
-
-//Iniciar modulo de manejo de sesiones
-app.use(session({ 
+app.use(session({ //Iniciar modulo de manejo de sesiones
     secret: 'secret-pass', //Cadena de caracteres secreta para firmar el Identificador de la sesión cookie
     cookie: { maxAge: 3600000 }, //Mantener las cookies de la sesión iniciada por una hora
     resave: false,
     saveUninitialized: true,
   }));
 
-app.use('/usuarios', RoutingUsers);
-app.use('/events', RoutingEvents);
+app.use('/usuarios', RoutingUsers) //Incluir el módulo usuarios y definir su directorio raíz como /usuarios
+app.use('/events', RoutingEvents) //Incluir el módulo eventos bajo y definir su directorio raíz como /events
 
-// init server
-Server.listen(PORT, function() { 
-  console.log(`Server is listening on port: ${PORT}`);
+Server.listen(PORT, function() { //Iniciar el servidor
+  console.log('Server is listening on port: ' + PORT) //Mostrar mensaje de inicialización del servidor en la cónsola.
 })

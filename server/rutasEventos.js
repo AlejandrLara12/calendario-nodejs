@@ -28,14 +28,14 @@ RouterEventos.get('/all', function(req, res) {
       }
     }else{ //Si no existe sesión iniciada
       res.send('logout'); //Devolver mensaje "logout"
-      res.end();
+      res.end()
     }
   })
 })
 
 RouterEventos.all('/', function(req, res) {
-  res.send('Error al mostrar el recurso solicitado. Por favor verifique la dirección url a la cual desea ingresar' );
-  res.end();
+  res.send('Error al mostrar el recurso solicitado. Por favor verifique la dirección url a la cual desea ingresar' )
+  res.end()
 })
 
 // Crear eventos
